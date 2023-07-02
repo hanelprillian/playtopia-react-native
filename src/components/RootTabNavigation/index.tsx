@@ -3,10 +3,10 @@ import {
   Image,
   ImageRequireSource,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import Text from '../Text';
 
 const icons: {[key: string]: ImageRequireSource} = {
   'Home-Default': require('../../assets/icons/homepage-black.png'),
@@ -97,8 +97,6 @@ export default function RootTabNavigation({
             <Text
               style={{
                 ...btnStyle.text,
-                fontSize: 12,
-                fontFamily: 'Nunito-Regular',
               }}>
               {label.toString()}
             </Text>

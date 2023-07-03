@@ -1,4 +1,4 @@
-const GRAPHQL_URL = 'https://dev-graphql.playtopia.id/graphql/v1/';
+const GRAPHQL_URL = 'https://dev-graphql.playtopia.id/graphql/v1';
 
 export const graphQLFetch = async (
   query: string,

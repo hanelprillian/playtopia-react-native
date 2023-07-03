@@ -10,6 +10,9 @@ import HomepageStatistics from '../components/Home/Statistics';
 import NotificationButton from '../components/NotificationButton';
 import SearchPlaceInput from '../components/SearchPlaceInput';
 import Divider from '../components/Divider';
+import CityThumbnail from '../components/CityThumbnail';
+import {useEffect, useState} from 'react';
+import {getGlobalOptions} from '../services/graphql/global';
 
 function Header() {
   const Style = StyleSheet.create({
@@ -46,6 +49,42 @@ function Header() {
   );
 }
 
+function CitySlider() {
+  const [cities, setCities] = useState<{name: string}[]>([]);
+
+  useEffect(() => {
+    async function callGlobalApi() {
+      const {response} = await getGlobalOptions();
+
+      if (response.allCities) setCities(response.allCities);
+    }
+
+    callGlobalApi();
+  }, []);
+
+  const Style = StyleSheet.create({
+    container: {
+      marginTop: 15,
+      marginBottom: 15,
+    },
+  });
+
+  return (
+    <ScrollView
+      horizontal
+      style={Style.container}
+      contentContainerStyle={{gap: 16}}>
+      {cities.map((city, index) => (
+        <CityThumbnail
+          key={`city-thumbnail-${index}`}
+          name={city.name}
+          thumbnail={require('../assets/images/example-city.png')}
+        />
+      ))}
+    </ScrollView>
+  );
+}
+
 function Content() {
   const Style = StyleSheet.create({
     contentContainer: {
@@ -64,27 +103,27 @@ function Content() {
       shadowRadius: 40,
       padding: 16,
     },
+    contentTitle: {
+      textAlign: 'center',
+      marginTop: 12,
+      marginBottom: 12,
+      fontSize: 20,
+      color: '#005474',
+      fontFamily: 'Nunito-Black',
+    },
+    divider: {marginTop: 30, marginBottom: 30},
   });
 
   return (
     <View style={Style.contentContainer}>
       <View style={Style.content}>
         <HomepageStatistics />
-        <Text
-          style={{
-            textAlign: 'center',
-            marginTop: 12,
-            marginBottom: 12,
-            fontSize: 20,
-            color: '#005474',
-            fontFamily: 'Nunito-Black',
-          }}>
-          Mau main dimana ?
-        </Text>
+        <Text style={Style.contentTitle}>Mau main dimana ?</Text>
         <SearchPlaceInput />
-        <View style={{marginTop: 30, marginBottom: 30}}>
+        <View style={Style.divider}>
           <Divider text="atau" />
         </View>
+        <CitySlider />
       </View>
     </View>
   );

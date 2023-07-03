@@ -22,7 +22,6 @@ const Style = StyleSheet.create({
     paddingLeft:8, 
     paddingRight:8, 
     top: -8,
-    // color: '#333',
     zIndex: 10,
     backgroundColor: '#FFF',
     fontSize: 12,

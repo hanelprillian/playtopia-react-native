@@ -9,6 +9,7 @@ import Text from '../components/Text';
 import HomepageStatistics from '../components/Home/Statistics';
 import NotificationButton from '../components/NotificationButton';
 import SearchPlaceInput from '../components/SearchPlaceInput';
+import Divider from '../components/Divider';
 
 function Header() {
   const Style = StyleSheet.create({
@@ -81,6 +82,9 @@ function Content() {
           Mau main dimana ?
         </Text>
         <SearchPlaceInput />
+        <View style={{marginTop: 30, marginBottom: 30}}>
+          <Divider text="atau" />
+        </View>
       </View>
     </View>
   );

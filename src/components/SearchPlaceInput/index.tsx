@@ -29,6 +29,9 @@ const Style = StyleSheet.create({
     borderRadius: 48,
     backgroundColor: '#E5F8FF',
     padding: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    maxHeight: 56,
   },
 
   searchIcon: {
@@ -41,6 +44,10 @@ const Style = StyleSheet.create({
   input: {
     borderWidth: 0,
     flex: 1,
+    marginLeft: 8,
+    fontSize: 14,
+    color: '#868686',
+    fontFamily: 'Nunito-Regular',
   },
 
   btn: {
@@ -48,9 +55,9 @@ const Style = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 100,
-    alignContent: 'center',
+    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '##00ADEE',
+    backgroundColor: '#00ADEE',
   },
 
   btnIcon: {

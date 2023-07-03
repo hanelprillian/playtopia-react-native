@@ -13,7 +13,11 @@ export default function SearchPlaceInput() {
         style={Style.searchIcon}
         source={require('../../assets/icons/search-black.png')}
       />
-      <TextInput style={Style.input} placeholder="Cari lokasi bermain" />
+      <TextInput
+        style={Style.input}
+        placeholderTextColor="#868686"
+        placeholder="Cari lokasi bermain"
+      />
       <TouchableOpacity style={Style.btn}>
         <Image
           style={Style.btnIcon}

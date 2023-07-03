@@ -1,15 +1,14 @@
 import {
-  Image,
   ImageBackground,
   ScrollView,
   StatusBar,
   StyleSheet,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import Text from '../components/Text';
 import HomepageStatistics from '../components/Home/Statistics';
 import NotificationButton from '../components/NotificationButton';
+import SearchPlaceInput from '../components/SearchPlaceInput';
 
 function Header() {
   const Style = StyleSheet.create({
@@ -81,11 +80,11 @@ function Content() {
           }}>
           Mau main dimana ?
         </Text>
+        <SearchPlaceInput />
       </View>
     </View>
   );
 }
-
 
 export default function HomeScreen() {
   return (

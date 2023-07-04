@@ -2,7 +2,7 @@ import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Text from '../../Text';
 
-export default function HomepageStatistics() {
+export default function () {
   const Style = StyleSheet.create({
     statistics: {
       flexDirection: 'row',

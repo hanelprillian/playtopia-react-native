@@ -1,51 +1,22 @@
-import {
-  ImageBackground,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  View,
-} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import Text from '../components/Text';
-import HomepageStatistics from '../components/Home/Statistics';
-import NotificationButton from '../components/NotificationButton';
+import Statistics from '../components/Home/Statistics';
 import SearchPlaceInput from '../components/SearchPlaceInput';
 import Divider from '../components/Divider';
 import CityThumbnail from '../components/CityThumbnail';
 import {useEffect, useState} from 'react';
 import {getGlobalOptions} from '../services/graphql/global';
+import Header from '../components/Home/Header';
+import HorizontalScroll from '../components/HorizontalScroll';
+import Region from '../components/Region';
+import CardImageFull from '../components/CardImageFull';
 
-function Header() {
-  const Style = StyleSheet.create({
-    header: {
-      paddingTop: 50,
-      padding: 16,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      height: 225,
-    },
-    headerGreetingText: {
-      fontSize: 14,
-      color: '#005474',
-      borderBottomLeftRadius: 16,
-      borderBottomRightRadius: 16,
-    },
-  });
-
+export default function HomeScreen() {
   return (
-    <ImageBackground
-      style={Style.header}
-      source={require('../assets/images/homepage-bg.png')}
-      resizeMode="cover">
-      <View>
-        <Text style={Style.headerGreetingText}>Hi</Text>
-        <Text style={{...Style.headerGreetingText, fontWeight: 'bold'}}>
-          Cameron Williamson
-        </Text>
-      </View>
-      <View>
-        <NotificationButton />
-      </View>
-    </ImageBackground>
+    <ScrollView>
+      <Header />
+      <Content />
+    </ScrollView>
   );
 }
 
@@ -62,18 +33,8 @@ function CitySlider() {
     callGlobalApi();
   }, []);
 
-  const Style = StyleSheet.create({
-    container: {
-      marginTop: 15,
-      marginBottom: 15,
-    },
-  });
-
   return (
-    <ScrollView
-      horizontal
-      style={Style.container}
-      contentContainerStyle={{gap: 16}}>
+    <HorizontalScroll>
       {cities.map((city, index) => (
         <CityThumbnail
           key={`city-thumbnail-${index}`}
@@ -81,7 +42,46 @@ function CitySlider() {
           thumbnail={require('../assets/images/example-city.png')}
         />
       ))}
-    </ScrollView>
+    </HorizontalScroll>
+  );
+}
+
+// TODO: this is dummy data
+const BLOG_DATA = [
+  {
+    title: 'Grand Opening Playtopia Margonda Depok',
+    image: require('../assets/images/banner-promo-1.png'),
+  },
+  {
+    title: 'Potongan 50rb untuk pengguna Baru aplikasi',
+    image: require('../assets/images/banner-promo-2.png'),
+    btnColor: '#EB008B',
+  },
+];
+
+function Articles() {
+  return (
+    <Region title="Info & Promo">
+      <View style={{marginLeft: -20, marginRight: -20}}>
+        <HorizontalScroll>
+          {BLOG_DATA.map((data, index) => (
+            <View
+              style={{
+                width: 330,
+                paddingLeft: index === 0 ? 20 : 0,
+                paddingRight: index === BLOG_DATA.length - 1 ? 20 : 0,
+              }}>
+              <CardImageFull
+                image={data.image}
+                btnText="Beli Tiket"
+                btnColor={data.btnColor}
+                title={data.title}
+              />
+            </View>
+          ))}
+        </HorizontalScroll>
+      </View>
+    </Region>
   );
 }
 
@@ -117,7 +117,7 @@ function Content() {
   return (
     <View style={Style.contentContainer}>
       <View style={Style.content}>
-        <HomepageStatistics />
+        <Statistics />
         <Text style={Style.contentTitle}>Mau main dimana ?</Text>
         <SearchPlaceInput />
         <View style={Style.divider}>
@@ -125,20 +125,7 @@ function Content() {
         </View>
         <CitySlider />
       </View>
+      <Articles />
     </View>
-  );
-}
-
-export default function HomeScreen() {
-  return (
-    <ScrollView>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="transparent"
-        translucent={true}
-      />
-      <Header />
-      <Content />
-    </ScrollView>
   );
 }
